@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>list groups</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+    <div id="page">
+
+        <h2>Liste de noms</h2>
+        <input id="add_nom" type="text"/>
+        <button id=button_1>ajouter ce nom à la Liste</button>
+        <button id=button_2>Retirer de la Liste</button>
+        <button id=button_3>Faire les groupes</button>
+        <button id=button_4>supprimer la liste</button>
+
+
+        <script>
+            let noms = [];
+            console.log(noms);
+            localStorage.getItem(noms);
+            console.log(noms);
+                       
+
+            document.querySelector("#button_1").addEventListener("click", function(){
+                let name = document.querySelector("#add_nom").value;
+                noms.push(name);
+                console.log(noms);
+                localStorage.setItem(noms.indexOf(name), name);
+            });
+
+            document.querySelector("#button_2").addEventListener("click", function(){
+                let rm_nom = document.querySelector("#add_nom").value;
+                /*let found = noms.includes('rm_nom');*/
+                let pos=noms.indexOf(rm_nom);
+                console.log(rm_nom)
+                console.log(pos);
+                if (pos=== -1) {
+                    window.alert("nom inconnu") 
+                }else {
+                    noms.splice(pos, 1);
+                    console.log(noms);
+                    localStorage.removeItem(noms.indexOf(rm_nom))
+                }
+             
+            });
+
+            document.querySelector("#button_3").addEventListener("click", function(){
+                let nb_per_grp=prompt("saisir le nombre par groupe", Number);
+                console.log(nb_per_grp);
+                let randomNumber = Math.floor(Math.random()*(noms.length));
+                console.log(randomNumber);
+            });
+            document.querySelector("#button_3").addEventListener("click", function(){
+                localStorage.clear();
+            });
+
+        </script>
+
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
