@@ -15,13 +15,17 @@
         <div id=init_list>
             <button id=button_1>AJOUTER</button>
             <button id=button_2>RETIRER</button>
-            <p id=myP></p>
+            
         </div>
-
+   
         <div id = results>
             <ul id = mylist></ul>
             <button id=button_3>Répartition</button>
             <button id=button_4>Supprimer</button>
+        </div>  
+    </div>      
+        <div id=list>
+            <p id=myP>Répartition par groupes : </p>
             <p id="myR">Répartition par groupes : </p>
             <ul id = mylistR></ul>
         </div>
@@ -39,25 +43,30 @@
             const mylist = document.querySelector("#mylist");
 
             const myR = document.querySelector("#myR");
-            const myH2 = document.createElement("h5");
+            const myH2 = document.createElement("h4");
             myR.appendChild(myH2);
 
             const mylistR = document.querySelector("#mylistR");
            
-            document.querySelector("#myR").style.display = 'none';
-                       
+            document.querySelector("#myP").style.display = 'none';
+            document.querySelector("#myR").style.display = 'none';           
 
             document.querySelector("#button_1").addEventListener("click", function(){
                 let name = document.querySelector("#add_nom").value;
-                noms.push(name);
-                console.log(noms);
-                let node = document.createElement("LI");
-                let textnode = document.createTextNode(name);
-                node.appendChild(textnode);
-                mylist.appendChild(node);
-                
-                localStorage.setItem(noms.indexOf(name), name);
-                document.querySelector("#add_nom").value="";
+                let numbers = /[0-9]+$/;
+                if (name == null || name == "" || name == " " || name.match(numbers)) {
+                    window.alert("nom invalide");
+                    } else {
+                    noms.push(name);
+                    console.log(noms);
+                    let node = document.createElement("LI");
+                    let textnode = document.createTextNode(name);
+                    node.appendChild(textnode);
+                    mylist.appendChild(node);
+                    
+                    localStorage.setItem(noms.indexOf(name), name);
+                    document.querySelector("#add_nom").value="";
+                    }
             });
 
           
@@ -70,10 +79,16 @@
                 document.querySelector("#add_nom").value="";
                 /*let found = noms.includes('rm_nom');*/
                 let pos=noms.indexOf(rm_nom);
-                console.log(rm_nom)
+                console.log(rm_nom);
                 console.log(pos);
                 if (pos=== -1) {
-                    window.alert("nom inconnu") 
+                    noms.splice(pos, 1);
+                    let node = document.getElementById("mylist");
+                    
+                    if (node.hasChildNodes()){
+                        node.removeChild(node.lastChild);
+                        localStorage.removeItem(noms.indexOf(rm_nom))
+                    }
                 }else {
                     noms.splice(pos, 1);
                     console.log(noms);
@@ -84,7 +99,6 @@
                         node.removeChild(node.childNodes[pos]);
                         localStorage.removeItem(noms.indexOf(rm_nom))
                     }
-                    
                 }
              
             });
@@ -95,6 +109,7 @@
 
 
             document.querySelector("#button_3").addEventListener("click", function(){
+                document.querySelector("#button_3").style.visibility = 'hidden';
                 if (noms.length === 0){
                     window.alert("Liste vide");
                 } else {
@@ -134,10 +149,12 @@
                 while (node.hasChildNodes()){
                     node.removeChild(node.firstChild);
                 }
-                let node2 = document.querySelector("#results");
+                let node2 = document.querySelector("#list");
                 let x = document.querySelector("#myR")
                    node2.removeChild(x)
-                
+                let y = document.querySelector("#myP")
+                node2.removeChild(y)
+                document.querySelector("#button_3").style.visibility = 'visible';
                 
                 /*document.getElementById("myR").parentNode.removeChild("myH2");*/
                 localStorage.clear();
@@ -145,7 +162,7 @@
 
         </script>
 
-    </div>
+    
 </body>
 
 

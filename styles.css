@@ -1,31 +1,110 @@
-title{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+div#page {
+    border: 0;
+    width: 250px;
+    margin: 0 auto;
+    border-radius: 25px;
+    text-shadow: 1px 1px 0 #fff;
+    background-color: #EBECF0;
+    box-shadow: -5px -5px 20px #fff,  5px 5px 20px #BABECC;
+    text-align: center;
 }
 
-#add_nom{
-    margin-bottom: 20px;
+body{
+    background-color: #EBECF0;
 }
+
+h2{
+    padding-top: 16px;
+    color:#61677C;
+    font-weight: bold;
+}
+
+
+#button_1, #button_2, #button_3, #button_4, #add_nom {
+    border: 0;
+    outline: 0;
+    font-size: 16px;
+    border-radius: 25px;
+    padding: 16px;
+    background-color:#EBECF0;
+    text-shadow: 1px 1px 0 #fff;
+    
+}
+#add_nom {
+    margin-right: 16px/2;
+    box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #fff;
+    width: 220px;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    -webkit-appearance: none;
+    color: #61677C;
+    }
+#add_nom:focus {
+    box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
+}
+
+
 #button_1{
-    margin-left: 5px;
+
+    color:#AE1100;
+    font-weight: bold;
+    box-shadow: -5px -5px 20px #fff,  5px 5px 20px #BABECC;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
 }
-#button_2{
-    margin-right: 10px;
-    margin-left: 5px;
+#button_2, #button_3, #button_4 {
+    color:#61677C;
+    font-weight: bold;
+    box-shadow: -5px -5px 20px #fff,  5px 5px 20px #BABECC;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-weight: 600;
 }
-#button_3{
-    margin-left: 5px;
+#button_1:hover, #button_2:hover, #button_3:hover, #button_4:hover{
+    box-shadow: -2px -2px 5px #fff, 2px 2px 5px #BABECC;
 }
-#button_4{
-    margin-right: 10px;
-    margin-left: 5px;
+    
+#button_1:active, #button_2:active, #button_3:active, #button_4:active{
+    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #fff;
+}
+
+#button_1, #button_2{
+    margin: 16px 5px 0 5px;
+}
+
+#button_3, #button_4{
+    margin-bottom: 16px;
+}
+
+#mylist{
+    text-align: left;
+    color:#61677C;
+}
+
+div#list {
+    border: 0;
+    width: 250px;
+    margin: 0 auto;
+    border-radius: 25px;
+    text-shadow: 1px 1px 0 #fff;
+    background-color: #EBECF0;
+    box-shadow: -5px -5px 20px #fff,  5px 5px 20px #BABECC;
+    text-align: center;
+}
+
+
+#myP{
+    text-transform: uppercase;
+    color:#61677C;
+    text-decoration: underline;
 }
 
 #myR{
-    text-transform: uppercase;
-}
-#myH2{
+    padding-top: 10px;
     text-transform: lowercase;
-    border-bottom: 1px solid #222;
+    color:#61677C;
+    
 }
