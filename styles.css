@@ -1,0 +1,31 @@
+title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#add_nom{
+    margin-bottom: 20px;
+}
+#button_1{
+    margin-left: 5px;
+}
+#button_2{
+    margin-right: 10px;
+    margin-left: 5px;
+}
+#button_3{
+    margin-left: 5px;
+}
+#button_4{
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+#myR{
+    text-transform: uppercase;
+}
+#myH2{
+    text-transform: lowercase;
+    border-bottom: 1px solid #222;
+}

@@ -7,31 +7,67 @@
     </head>
 <body>
     <div id="page">
+        <h2>Liste de noms :</h2>
+        <div id = inputs>
+            <input id="add_nom" type="text"/>
+        </div>
 
-        <h2>Liste de noms</h2>
-        <input id="add_nom" type="text"/>
-        <button id=button_1>ajouter ce nom à la Liste</button>
-        <button id=button_2>Retirer de la Liste</button>
-        <button id=button_3>Faire les groupes</button>
-        <button id=button_4>supprimer la liste</button>
+        <div id=init_list>
+            <button id=button_1>AJOUTER</button>
+            <button id=button_2>RETIRER</button>
+            <p id=myP></p>
+        </div>
 
+        <div id = results>
+            <ul id = mylist></ul>
+            <button id=button_3>Répartition</button>
+            <button id=button_4>Supprimer</button>
+            <p id="myR">Répartition par groupes : </p>
+            <ul id = mylistR></ul>
+        </div>
 
         <script>
             let noms = [];
             console.log(noms);
             localStorage.getItem(noms);
             console.log(noms);
+
+            const myP = document.querySelector("#myP");
+            const myH1 = document.createElement("h3");
+            myP.appendChild(myH1);
+
+            const mylist = document.querySelector("#mylist");
+
+            const myR = document.querySelector("#myR");
+            const myH2 = document.createElement("h5");
+            myR.appendChild(myH2);
+
+            const mylistR = document.querySelector("#mylistR");
+           
+            document.querySelector("#myR").style.display = 'none';
                        
 
             document.querySelector("#button_1").addEventListener("click", function(){
                 let name = document.querySelector("#add_nom").value;
                 noms.push(name);
                 console.log(noms);
+                let node = document.createElement("LI");
+                let textnode = document.createTextNode(name);
+                node.appendChild(textnode);
+                mylist.appendChild(node);
+                
                 localStorage.setItem(noms.indexOf(name), name);
+                document.querySelector("#add_nom").value="";
             });
+
+          
+            
+            
+            
 
             document.querySelector("#button_2").addEventListener("click", function(){
                 let rm_nom = document.querySelector("#add_nom").value;
+                document.querySelector("#add_nom").value="";
                 /*let found = noms.includes('rm_nom');*/
                 let pos=noms.indexOf(rm_nom);
                 console.log(rm_nom)
@@ -41,18 +77,69 @@
                 }else {
                     noms.splice(pos, 1);
                     console.log(noms);
-                    localStorage.removeItem(noms.indexOf(rm_nom))
+                    /*myH1.innerText = noms;*/
+                    let node = document.getElementById("mylist");
+                    
+                    if (node.hasChildNodes()){
+                        node.removeChild(node.childNodes[pos]);
+                        localStorage.removeItem(noms.indexOf(rm_nom))
+                    }
+                    
                 }
              
             });
+            
+            document.querySelector("#button_3").addEventListener("click", function(){
+                document.querySelector("#myR").style.display = 'block';
+            });
+
 
             document.querySelector("#button_3").addEventListener("click", function(){
-                let nb_per_grp=prompt("saisir le nombre par groupe", Number);
-                console.log(nb_per_grp);
-                let randomNumber = Math.floor(Math.random()*(noms.length));
-                console.log(randomNumber);
-            });
-            document.querySelector("#button_3").addEventListener("click", function(){
+                if (noms.length === 0){
+                    window.alert("Liste vide");
+                } else {
+                    let nb_per_grp=prompt("saisir le nombre par groupe", "");
+
+                    if(nb_per_grp != null && nb_per_grp.trim() != ''){ 
+                        console.log(nb_per_grp);
+                    } else {
+                        console.log('aucunes entrée');
+                    }
+
+                    console.log(nb_per_grp);
+
+                    const shuffled = [...noms.sort(() => Math.random() - 0.5)];
+                    console.log(shuffled);
+                    
+                    i = 0;
+                    while (i <= (shuffled.length/nb_per_grp)) {
+                        console.log(i);
+                        myH2.innerText += "groupe " + (i+1) + " : \n";
+                        groups = shuffled.slice(0, nb_per_grp);
+                        
+                        myH2.innerText += groups + "\n\n"; 
+                        console.log(groups);
+                        shuffled.splice(0, nb_per_grp);
+                        i++;
+                        }
+                }   
+                });
+                
+
+
+
+
+            document.querySelector("#button_4").addEventListener("click", function(){
+                let node = document.getElementById("mylist");
+                while (node.hasChildNodes()){
+                    node.removeChild(node.firstChild);
+                }
+                let node2 = document.querySelector("#results");
+                let x = document.querySelector("#myR")
+                   node2.removeChild(x)
+                
+                
+                /*document.getElementById("myR").parentNode.removeChild("myH2");*/
                 localStorage.clear();
             });
 
